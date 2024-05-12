@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
 from EasyStock.models import Product
 from EasyStock.serializers import ProductListSerializer, ProductUpdateSerializer, ProductDetailSerializer
 
@@ -6,6 +7,7 @@ from EasyStock.serializers import ProductListSerializer, ProductUpdateSerializer
 class ProductCreateView(generics.CreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
+    permission_classes = [IsAdminUser]
 
 
 class ProductListView(generics.ListAPIView):
@@ -21,8 +23,10 @@ class ProductDetailView(generics.RetrieveAPIView):
 class ProductUpdateView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductUpdateSerializer
+    permission_classes = [IsAdminUser]
 
 
 class ProductDeleteView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
+    permission_classes = [IsAdminUser]
